@@ -4,37 +4,125 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/styles.admin.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header class="header" id="header">
+        <a href="#" class="header__logo">
+            <span class="logo--lg">admin panel</span>
+            <span class="logo--sm">ADM</span>
+        </a>
+        <nav class="header__nav">
+            <button class="toggle-menu-button" type="button">@Icon.fa("bars")@Icon.fa("angle-left")</button>
+            <div class="nav-right">
+                <a href="#" class="nav-noti">
+                    @Icon.fa("envelope-o") <span class="badge badge-success">4</span>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <img alt="user avatar" class="user__avatar--mini" src="@Url.Content("~/Areas/Admin/Content/images/user.jpg")" />
+                        <span class="ph">Tien Quang</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuUser">
+                        <li>
+                            <div class="account-info flex-box v-center mb">
+                                <span class="account-info__icon">@Icon.fa("usd")</span>
+                                <div class="flex-item">
+                                    <div class="account-info__title">account info</div>
+                                    <span class="h4">$20.000</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#">Change password</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+        </nav>
+    </header>
+
+    <div class="body-content">
+        <aside class="sidebar" id="sidebar">
+            <section class="side-user">
+                <div class="user__avatar mr">
+                    <img alt="avatar" src="@Url.Content("~/Areas/Admin/Content/images/user.jpg")">
+                </div>
+                <div class="user__info">
+                    <div>Phan Tien Quang</div>
+                    <div class="flex-box v-center mt">
+                        <span class="user-state"></span><span>Online</span>
+                        <div class="material-switch ml+">
+                            <input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox" />
+                            <label for="someSwitchOptionPrimary" class="label-primary"></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <ul class="side-menu menu">
+                <li class="menu-title">functionalities</li>
+                <li>
+                    <a href="#">
+                        @Icon.fa("laptop")
+                        <span>Dashboard</span>
+                        <span class="mi-right-content">
+                            @Icon.fa("angle-left")
+                        </span>
+                    </a>
+                    <ul class="menu--sub">
+                        <li><a href="#">Admin</a></li>
+                        <li><a href="#">User</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        @Icon.fa("file-o")
+                        <span>Orders</span>
+                        <span class="mi-right-content">
+                            <span class="badge badge-info">4</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        @Icon.fa("cogs")
+                        <span>Settings</span>
+                        <span class="mi-right-content">
+                            @Icon.fa("angle-left")
+                        </span>
+                    </a>
+                    <ul class="menu--sub">
+                        <li><a href="#">Print</a></li>
+                        <li><a href="#">Format</a></li>
+                        <li><a href="#">Connection</a></li>
+                    </ul>
+                </li>
+                <li class="menu-title">report</li>
+
+            </ul>
+        </aside>
+
+        <div class="main">
+            @RenderBody()
+
+            <footer class="footer">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
         </div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/Scripts/jquery-2.2.4.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Areas/Admin/Scripts/common.js"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
