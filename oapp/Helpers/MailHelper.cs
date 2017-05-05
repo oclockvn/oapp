@@ -1,4 +1,6 @@
-﻿using System;
+﻿using oapp.Extensions;
+using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -8,6 +10,8 @@ namespace oapp.Helpers
 {
     public class MailHelper
     {
+        private static readonly NLog.ILogger log = NLog.LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// send email using gmail. Make sure that you add config keys defined in this method
         /// </summary>
@@ -46,8 +50,10 @@ namespace oapp.Helpers
                     return true;
                 }
             }
-            catch (Exception) // todo: log error
-            {                
+            catch (Exception ex) // todo: log error
+            {
+                Debug.WriteLine(ex.ToErrorMessage());
+                log.Error($"Send email from: {from} -> to: {to} error: " + ex.ToErrorMessage());
                 return false;
             }
         }

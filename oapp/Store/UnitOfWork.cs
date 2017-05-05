@@ -1,4 +1,5 @@
 ﻿using oapp.Extensions;
+using oapp.Helpers;
 using oapp.Repos;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace oapp.Store
 
     public class UnitOfWork : IUnitOfWork
     {
+        private static readonly NLog.ILogger log = NLog.LogManager.GetCurrentClassLogger();
         private readonly Dictionary<Type, Lazy<IRepository>> repos;
         private Lazy<DbContext> db;
         private bool disposed;
@@ -54,6 +56,9 @@ namespace oapp.Store
             {
                 msg = ex.ToErrorMessage();
             }
+
+            // send email to config account
+            MailHelper.SendMail(string.Empty, string.Empty, "Save changes error", msg);
 
             return new Tuple<bool, string>(false, msg);
         }
