@@ -200,6 +200,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\TEntity.cs" />
+    <Compile Include="Extensions\OExtension.cs" />
     <Compile Include="Extensions\OExtension.Number.cs" />
     <Compile Include="Extensions\OExtension.String.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,7 +211,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\Repository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Store\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\images\user.jpg" />

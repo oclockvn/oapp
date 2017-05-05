@@ -2,9 +2,10 @@
 
 namespace oapp.Areas.Admin.Controllers
 {
+    [RoutePrefix("dashboard")]
     public class DashboardController : Controller
     {
-        // GET: Admin/Dashboard
+               
         public ActionResult Index()
         {
             return View();
