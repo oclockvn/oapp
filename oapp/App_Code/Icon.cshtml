@@ -1,0 +1,4 @@
+﻿@helper fa(string icon, int size = 1)
+{
+    <i class="fa fa-@icon@(size == 1 ? string.Empty : $" fa-{size}x")" aria-hidden="true"></i>
+}

@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -209,6 +210,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\images\user.jpg" />
+    <Content Include="Areas\Admin\Content\styles.admin.css" />
+    <Content Include="Areas\Admin\Scripts\common.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -217,12 +221,33 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="App_Code\Icon.cshtml" />
+    <Content Include="Areas\Admin\Content\scss\core\_color.scss" />
+    <Content Include="Areas\Admin\Content\scss\core\_index.scss" />
+    <Content Include="Areas\Admin\Content\scss\core\_size.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_border.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_boxmodel.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_common.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_flex.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_font.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_shadow.scss" />
+    <Content Include="Areas\Admin\Content\scss\modules\_toggle.scss" />
+    <Content Include="Areas\Admin\Content\scss\partials\_footer.scss" />
+    <Content Include="Areas\Admin\Content\scss\partials\_header.scss" />
+    <Content Include="Areas\Admin\Content\scss\partials\_layout.scss" />
+    <Content Include="Areas\Admin\Content\scss\partials\_menu.scss" />
+    <Content Include="Areas\Admin\Content\styles.admin.css.map" />
+    <Content Include="Areas\Admin\Content\styles.admin.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -272,9 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

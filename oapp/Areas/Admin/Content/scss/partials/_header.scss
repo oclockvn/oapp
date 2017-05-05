@@ -1,0 +1,257 @@
+$header-color: #263238;
+$sidebar-color: #222d32;
+$logo-bg: #367fa9;
+
+.header {
+    height: $header-height;
+    display: flex;
+	// position: relative;
+    z-index: 100;
+	position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+
+    .header__logo {
+        width: $nav-size;
+        background: $logo-bg;
+        display: block;
+        height: $header-height;
+        line-height: $header-height;
+        text-align: center;
+        color: #eee;
+        font-size: 1.2em;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+		transition: 0.2s cubic-bezier(0.13, 0.71, 0.38, 0.91); 
+
+		.logo--sm {
+			display: none;
+		}
+    }
+
+    .header__nav {
+        background: #111;
+        flex: 1;
+        display: flex;
+    }
+
+	&.mini {
+		.header__logo {
+			width: $nav-size-mini;
+
+			.logo--sm {
+				display: inline;
+			}
+
+			.logo--lg {
+				display: none;
+			}
+		}
+
+		.toggle-menu-button {
+			.fa-angle-left {
+				transform: translateY(-50%) translateX(-50%) scale(1) rotate(180deg) !important;
+				opacity: 1;
+			}
+			.fa-bars {
+				opacity: 0;
+				transform: scale(0);
+			}
+		}
+	}
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 8px;
+}
+
+.user__avatar--mini {
+	max-width: 100%;
+	max-height: 32px;
+	border-radius: 50%;
+	display: block;
+	float: left;
+}
+
+.user {
+	> a {
+		display: block;
+		height: $header-height;
+		display: flex;
+		align-items: center;
+		padding: 0 8px;
+		color: #fff;
+		text-decoration: none;
+
+		&:hover {
+			background: $header-color;
+		}
+	}
+}
+
+.dropdown .dropdown-toggle {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 16px;
+    background: transparent;
+    color: #eee;
+    border: none;
+    outline: none;
+    border-radius: 0 !important;
+	display: flex;
+	align-items: center;
+}
+
+.dropdown.open > .dropdown-toggle {
+    background: transparent !important;
+    color: #eee !important;
+    border: none;
+}
+
+.dropdown .dropdown-toggle:hover, .dropdown.open .dropdown-toggle {
+    background: #263238 !important;
+}
+
+.account-info {
+	background: #111;
+    color: #eee;
+    padding: 32px 16px;
+    min-width: 200px;
+
+	.account-info__icon {
+		display: block;
+		padding: 16px;
+		border-right: 1px solid #aaa;
+		margin-right: 16px;
+	}
+
+	.account-info__title {
+		font-weight: 300;
+		font-size: 11px;
+		margin-bottom: 4px;
+	}
+}
+
+.toggle-menu-button {
+    width: $header-height;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+	position: relative;    
+
+	.fa-angle-left {
+		position: absolute;    
+		left: 50%;
+		top: 50%;
+		transition: .4s ease-in-out;
+		transform: translateY(-50%) translateX(-50%) scale(0);
+		opacity: 0;    
+	}
+
+	.fa-bars {
+		transition: .2s ease-in-out;
+	}
+
+	&:hover, &.active {
+        background: $header-color;
+
+		.fa-bars {
+			opacity: 0;
+			transform: scale(0);
+		}
+		.fa-angle-left {
+			opacity: 1;
+			transform: translateY(-50%) translateX(-50%) scale(1);
+		}
+	}
+}
+
+.nav-noti {
+    position: relative;
+    height: $header-height;
+    line-height: $header-height;
+    display: block;
+    padding: 0 16px;
+    color: #fff;
+    text-decoration: none;
+
+    .badge {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        margin: -18px;
+    }
+
+    &:hover {
+        background: $header-color;
+        color: #fff;
+    }
+}
+
+.sidebar {
+    // position: absolute;
+    width: $nav-size;
+    // top: 0;
+    // left: 0;
+    // height: 100%;
+    // padding-top: 50px;
+    background: $sidebar-color;
+	transition: 0.2s cubic-bezier(0.13, 0.71, 0.38, 0.91);
+
+	.side-user {    
+		display: flex;
+		padding: 16px 8px;
+	}
+
+	.user__avatar img {
+		max-width: 48px;
+		border-radius: 50%;
+	}
+
+	.user__info {
+		font-size: 13px;
+		color: #aaa;
+	}
+
+	.user-state {
+		display: block;
+		width: 8px;
+		height: 8px;
+		background: #c1199c;
+		border-radius: 50%;
+		margin-right: 8px;
+		position: relative;
+	}
+
+	.user-state:after {
+		content: '';
+		display: block;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #4caf50;
+		border-radius: 50%;
+		animation: scaleUpDown 1.5s cubic-bezier(0.76, 0.23, 0.35, 0.89) infinite;
+		animation-fill-mode: both;
+		transform-origin: center center;
+		position: absolute;
+	}
+}
+
+@keyframes scaleUpDown {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);        
+    }
+}

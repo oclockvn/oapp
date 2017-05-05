@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+.body-content {
+    min-height: 100%;
+    display: flex;
+    padding-top: $header-height;
+    // flex-direction: column;
+
+    .main {
+        flex: 1;
+    }
+}
