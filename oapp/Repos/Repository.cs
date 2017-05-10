@@ -1,4 +1,5 @@
 ﻿using oapp.Entities;
+using oapp.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +12,7 @@ namespace oapp.Repos
     public interface IRepository : IDisposable
     {}
 
-    public interface IRepository<T> : IRepository where T : BaseEntity
+    public interface IRepository<T> : IRepository where T : TEntity
     {
         /// <summary>
         /// return IQueryable object from dataset
@@ -57,23 +58,23 @@ namespace oapp.Repos
         /// <param name="model">entity model to update</param>
         /// <param name="updateProperties">if provide any properties, update these properties instead of all entity</param>
         void Update(T model, List<Expression<Func<T, object>>> updateProperties = null);
-
+        
         /// <summary>
-        /// delete entity
-        /// </summary>
-        /// <param name="model">entity to delete</param>
-        /// <returns>true if deleted entity is not null, otherwise return false</returns>
-        bool Delete(T model);
-
-        /// <summary>
-        /// delete entity by id. This can override in inherit class
+        /// delete entity by id.
         /// </summary>
         /// <param name="id">primary key of id to delete</param>
         /// <returns>true if deleted entity is not null, otherwise return false</returns>
-        bool Delete(object id);
+        int Delete(int id);
+
+        /// <summary>
+        /// delete set of entities by condition
+        /// </summary>
+        /// <param name="where">The condition to filter entities</param>
+        /// <returns>Total number of deleted entities</returns>
+        int Delete(Expression<Func<T, bool>> where);
     }
 
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : TEntity
     {
         private DbContext db;
         private readonly DbSet<T> table;
@@ -89,16 +90,17 @@ namespace oapp.Repos
         public T GetById(object id) => table.Find(id);
         public T Create(T model) => table.Add(model);
 
-        public virtual bool Delete(object id)
+        public int Delete(int id) => Delete(x => x.Id == id);
+        
+        public int Delete(Expression<Func<T, bool>> where)
         {
-            var model = GetById(id);
-            return model == null ? false : Delete(model);
-        }
+            var entities = All.Where(where);
+            foreach (var t in entities)
+            {
+                table.Remove(t);
+            }
 
-        public bool Delete(T model)
-        {
-            table.Attach(model);
-            return table.Remove(model) != null;
+            return table.Count();
         }
 
         public T Find(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] includes)
@@ -106,11 +108,8 @@ namespace oapp.Repos
             var all = All;
 
             if (includes != null && includes.Length > 0)
-            {                
-                for (int i = 0; i < includes.Length; i++)
-                {
-                    all = all.Include(includes[i]);
-                }
+            {
+                all = all.Including(includes);
             }
 
             T result = default(T);
@@ -129,10 +128,7 @@ namespace oapp.Repos
 
             if (includes != null && includes.Length > 0)
             {
-                for (int i = 0; i < includes.Length; i++)
-                {
-                    all = all.Include(includes[i]);
-                }
+                all = all.Including(includes);
             }
 
             if (where != null)

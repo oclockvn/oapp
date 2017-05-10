@@ -207,6 +207,7 @@
     <Compile Include="Entities\TEntity.cs" />
     <Compile Include="Extensions\OExtension.cs" />
     <Compile Include="Extensions\OExtension.Number.cs" />
+    <Compile Include="Extensions\OExtension.Query.cs" />
     <Compile Include="Extensions\OExtension.String.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

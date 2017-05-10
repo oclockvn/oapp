@@ -1,12 +1,7 @@
 ﻿namespace oapp.Entities
 {
-    public class TEntity<T>
+    public class TEntity
     {
-        T Id { get; set; }
-    }
-
-    public class BaseEntity : TEntity<int>
-    {
-
+        public int Id { get; set; }
     }
 }
