@@ -1,4 +1,5 @@
-﻿using oapp.Extensions;
+﻿using oapp.Entities;
+using oapp.Extensions;
 using oapp.Helpers;
 using oapp.Repos;
 using System;
@@ -13,6 +14,7 @@ namespace oapp.Store
     {
         Tuple<bool, string> SaveChanges();
         TRepository Get<TRepository>() where TRepository : class, IRepository;
+        IRepository<T> GetByType<T>() where T : TEntity;
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -67,8 +69,13 @@ namespace oapp.Store
         {
             if (!repos.ContainsKey(typeof(TRepository)))
                 throw new Exception($"Repository of type {typeof(TRepository)} have not been registered!");
-
+            
             return repos[typeof(TRepository)].Value as TRepository;
+        }
+
+        public IRepository<T> GetByType<T>() where T : TEntity
+        {
+            return new Repository<T>(db.Value);
         }
 
         public void Dispose()
